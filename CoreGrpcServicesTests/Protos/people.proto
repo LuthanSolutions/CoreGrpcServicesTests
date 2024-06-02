@@ -6,7 +6,7 @@ import "Protos/coregrpc.proto";
 option csharp_namespace = "CoreGrpcClient";
 
 service People {
-  rpc GetPeople (GetPeopleRequest) returns (DefaultResponseObject);
+  rpc GetPeople (GetPeopleRequest) returns (CoreDefaultResponseObject);
 }
 
 message GetPeopleRequest {

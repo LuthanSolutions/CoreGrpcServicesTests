@@ -4,7 +4,7 @@ import "google/protobuf/any.proto";
 
 option csharp_namespace = "CoreGrpcClient";
 
-message DefaultResponseObject {
+message CoreDefaultResponseObject {
 	repeated google.protobuf.Any Content = 1;
 	repeated Error Errors = 2;
 	MetaDataInfo MetaDataInfo = 3;

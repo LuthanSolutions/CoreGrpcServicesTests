@@ -6,7 +6,7 @@ using Google.Protobuf;
 
 public static class GrpcResponseConverter
 {
-    public static T ConvertGrpcResponseTo<T, TContent>(DefaultResponseObject response)
+    public static T ConvertGrpcResponseTo<T, TContent>(CoreDefaultResponseObject response)
         where T : DefaultResponseObject<TContent>
         where TContent : IMessage, new()
     {
@@ -17,7 +17,7 @@ public static class GrpcResponseConverter
         return defaultResponseObject;
     }
 
-    private static T InstantiateDefaultResponseObject<T, TContent>(DefaultResponseObject response)
+    private static T InstantiateDefaultResponseObject<T, TContent>(CoreDefaultResponseObject response)
         where T : DefaultResponseObject<TContent>
         where TContent : new()
     {
@@ -27,7 +27,7 @@ public static class GrpcResponseConverter
         return defaultResponseObject;
     }
 
-    private static void PopulateMetaDataInfo<T, TContent>(DefaultResponseObject response, T defaultResponseObject)
+    private static void PopulateMetaDataInfo<T, TContent>(CoreDefaultResponseObject response, T defaultResponseObject)
         where T : DefaultResponseObject<TContent>
         where TContent : new() =>
         defaultResponseObject.MetaDataInfo = new Models.MetaDataInfo
@@ -37,7 +37,7 @@ public static class GrpcResponseConverter
             DataSource = response.MetaDataInfo.DataSource,
         };
 
-    private static void PopulateErrors<T, TContent>(DefaultResponseObject response, T defaultResponseObject)
+    private static void PopulateErrors<T, TContent>(CoreDefaultResponseObject response, T defaultResponseObject)
         where T : DefaultResponseObject<TContent>
         where TContent : new() =>
         defaultResponseObject.Errors = response.Errors
@@ -48,7 +48,7 @@ public static class GrpcResponseConverter
                     Description = err.Description
                 });
 
-    private static void PopulateContent<T, TContent>(DefaultResponseObject response, T defaultResponseObject)
+    private static void PopulateContent<T, TContent>(CoreDefaultResponseObject response, T defaultResponseObject)
         where T : DefaultResponseObject<TContent>
         where TContent : IMessage, new() =>
         defaultResponseObject.Content = response.Content.Select(cnt => cnt.Unpack<TContent>());
